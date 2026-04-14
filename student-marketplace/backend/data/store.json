@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "id": "user-1",
+      "username": "alex.chen",
+      "email": "alex@example.edu",
+      "password": "demo-password",
+      "school": "Harvard University",
+      "region": "Greater Boston",
+      "area": "Harvard Square",
+      "campus": "Harvard Yard",
+      "bio": "Selling dorm essentials before summer move-out.",
+      "createdAt": "2026-03-20T14:00:00.000Z"
+    },
+    {
+      "id": "user-1775170758232-b0bu4x",
+      "username": "Ryan Shen",
+      "email": "rshen39@gmail.com",
+      "password": "123456789",
+      "campus": "Harvard",
+      "school": "Harvard",
+      "region": "Boston",
+      "area": "Harvard Square",
+      "bio": "",
+      "createdAt": "2026-04-02T22:59:18.232Z"
+    }
+  ],
+  "listings": [
+    {
+      "imageData": "",
+      "id": "listing-test-1",
+      "title": "Compact Microwave",
+      "description": "Works well, clean, and easy to pick up near campus.",
+      "price": 35,
+      "category": "Appliances",
+      "location": "Cambridge",
+      "school": "Harvard University",
+      "region": "Greater Boston",
+      "area": "Harvard Square",
+      "sellerId": "user-1",
+      "createdAt": "2026-04-02T23:00:00.000Z"
+    }
+  ]
+}

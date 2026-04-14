@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.listing-card {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.listing-card img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px 0;
+    background: #28a745;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background: #218838;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #007bff;
+    color: #ffffff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
