@@ -3,36 +3,52 @@ import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils';
 
 function ListingCard({ listing }) {
+  const regionParts = [listing.school, listing.region, listing.area].filter(Boolean);
+
   return (
     <article className="listing-card">
-      {listing.imageData ? (
-        <img className="listing-image" src={listing.imageData} alt={listing.title} />
-      ) : (
-        <div className="listing-image listing-image-placeholder">No photo uploaded</div>
-      )}
-      <div className="listing-meta">
-        <span className="tag">{listing.category}</span>
-        <span className="price-pill">{formatPrice(listing.price)}</span>
+      <div className="listing-image-wrap">
+        {listing.imageData ? (
+          <img className="listing-image" src={listing.imageData} alt={listing.title} />
+        ) : (
+          <div className="listing-image-placeholder">No photo</div>
+        )}
+        <span className="tag listing-cat-badge">{listing.category}</span>
       </div>
-      <h3>{listing.title}</h3>
-      <p className="muted">{listing.description}</p>
-      <div className="listing-meta">
-        <span>{listing.location}</span>
-        <span>{listing.seller ? listing.seller.username : 'Unknown seller'}</span>
-      </div>
-      <p className="muted listing-region">
-        {[listing.school, listing.region, listing.area].filter(Boolean).join(' • ')}
-      </p>
-      <div className="button-row listing-actions">
-        <Link
-          className="button"
-          to={{
-            pathname: '/checkout',
-            state: { listing },
-          }}
-        >
-          Buy now
-        </Link>
+
+      <div className="listing-body">
+        <div className="listing-top">
+          <h3>{listing.title}</h3>
+          <span className="price-pill">{formatPrice(listing.price)}</span>
+        </div>
+
+        <p className="listing-desc">{listing.description}</p>
+
+        <div className="listing-meta-row">
+          <span className="listing-location">
+            <span aria-hidden="true">📍</span>
+            {listing.location}
+          </span>
+          <span>{listing.seller ? listing.seller.username : 'Anonymous'}</span>
+        </div>
+
+        {regionParts.length > 0 && (
+          <div className="listing-region-tags">
+            {regionParts.map((part) => (
+              <span key={part} className="tag">{part}</span>
+            ))}
+          </div>
+        )}
+
+        <div className="listing-actions">
+          <Link
+            className="button"
+            style={{ width: '100%' }}
+            to={{ pathname: '/checkout', state: { listing } }}
+          >
+            Buy now
+          </Link>
+        </div>
       </div>
     </article>
   );

@@ -8,89 +8,94 @@ function UserProfile({ currentUser }) {
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
 
-  async function loadProfileForUser(userId, active = true) {
+  async function loadProfile(userId, active = true) {
     try {
       const data = await fetchUserProfile(userId);
-      if (active) {
-        setProfile(data);
-      }
-    } catch (err) {
-      if (active) {
-        setError('Unable to load your profile. Start the backend on port 5001.');
-      }
+      if (active) setProfile(data);
+    } catch {
+      if (active) setError('Unable to load your profile. Start the backend on port 5001.');
     }
   }
 
   useEffect(() => {
-    if (!currentUser) {
-      setProfile(null);
-      setError('');
-      return undefined;
-    }
-
+    if (!currentUser) { setProfile(null); setError(''); return undefined; }
     let active = true;
-
-    loadProfileForUser(currentUser.id, active);
-    return () => {
-      active = false;
-    };
+    loadProfile(currentUser.id, active);
+    return () => { active = false; };
   }, [currentUser]);
 
   async function handleDelete(listingId) {
-    if (!currentUser) {
-      return;
-    }
-
+    if (!currentUser) return;
     setError('');
     setStatus('');
-
     try {
       await deleteListing(listingId, currentUser.id);
       setStatus('Listing deleted.');
-      await loadProfileForUser(currentUser.id, true);
+      await loadProfile(currentUser.id, true);
     } catch (err) {
       setError(err.response?.data?.message || 'Unable to delete listing.');
     }
   }
 
+  const initials = profile
+    ? profile.username.slice(0, 2).toUpperCase()
+    : currentUser
+    ? currentUser.username?.slice(0, 2).toUpperCase()
+    : '?';
+
   return (
     <main className="page">
       <section className="panel section">
         <span className="eyebrow">Seller profile</span>
-        <h2 className="section-title">Profile</h2>
+        <h2 className="section-title">My Profile</h2>
+
         {!currentUser ? (
           <div className="status error">
-            Sign in first to see your profile. <Link to="/auth">Go to login.</Link>
+            Sign in to see your profile.{' '}
+            <Link to="/auth" style={{ color: 'var(--green)', fontWeight: 600 }}>Go to login →</Link>
           </div>
         ) : null}
         {error ? <div className="status error">{error}</div> : null}
         {status ? <div className="status success">{status}</div> : null}
+
         {currentUser && !profile ? (
-          <p className="muted">Loading profile...</p>
+          <p className="muted">Loading profile…</p>
         ) : profile ? (
           <div className="profile-grid">
-            <div>
-              <h3>{profile.username}</h3>
-              <p className="muted">{profile.email}</p>
-              <p>{profile.bio || 'No bio provided.'}</p>
-              <span className="tag">{profile.campus || 'Campus not set'}</span>
-              <div className="profile-details">
-                <span className="tag">{profile.school || 'School not set'}</span>
-                <span className="tag">{profile.region || 'Region not set'}</span>
-                <span className="tag">{profile.area || 'Area not set'}</span>
+
+            <div className="profile-info-card">
+              <div className="profile-avatar">{initials}</div>
+              <p className="profile-name">{profile.username}</p>
+              <p className="profile-email">{profile.email}</p>
+              <p className="profile-bio">{profile.bio || 'No bio provided.'}</p>
+              <div className="profile-tags">
+                {profile.campus ? <span className="tag">{profile.campus}</span> : null}
+                {profile.school ? <span className="tag">{profile.school}</span> : null}
+                {profile.region ? <span className="tag">{profile.region}</span> : null}
+                {profile.area ? <span className="tag">{profile.area}</span> : null}
               </div>
             </div>
+
             <div>
-              <h3>Active listings</h3>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 16 }}>
+                Active listings ({profile.listings.length})
+              </h3>
               <div className="cards">
                 {profile.listings.length === 0 ? (
-                  <div className="empty-state">This seller has no active listings.</div>
+                  <div className="empty-state">
+                    You have no active listings.{' '}
+                    <Link to="/listings" style={{ color: 'var(--green)' }}>Post your first item →</Link>
+                  </div>
                 ) : (
                   profile.listings.map((listing) => (
                     <div key={listing.id} className="profile-listing">
                       <ListingCard listing={listing} />
                       <div className="button-row profile-listing-actions">
-                        <button className="button-secondary destructive-button" type="button" onClick={() => handleDelete(listing.id)}>
+                        <button
+                          className="button-secondary destructive-button"
+                          type="button"
+                          onClick={() => handleDelete(listing.id)}
+                        >
                           Delete listing
                         </button>
                       </div>
@@ -99,6 +104,7 @@ function UserProfile({ currentUser }) {
                 )}
               </div>
             </div>
+
           </div>
         ) : null}
       </section>

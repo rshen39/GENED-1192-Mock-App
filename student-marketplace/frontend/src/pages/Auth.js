@@ -2,21 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { loginAccount, registerAccount, storeSession } from '../utils';
 
-const initialLogin = {
-  email: '',
-  password: '',
-};
-
-const initialSignup = {
-  username: '',
-  email: '',
-  password: '',
-  school: '',
-  region: '',
-  area: '',
-  campus: '',
-  bio: '',
-};
+const initialLogin = { email: '', password: '' };
+const initialSignup = { username: '', email: '', password: '', school: '', region: '', area: '', campus: '', bio: '' };
 
 function Auth({ onLogin }) {
   const history = useHistory();
@@ -29,14 +16,13 @@ function Auth({ onLogin }) {
   async function handleLogin(event) {
     event.preventDefault();
     setLoginError('');
-
     try {
       const user = await loginAccount(loginForm);
       storeSession(user);
       onLogin(user);
       history.push('/listings');
     } catch (error) {
-      setLoginError(error.response?.data?.message || 'Unable to log in.');
+      setLoginError(error.response?.data?.message || 'Unable to log in. Check your email and password.');
     }
   }
 
@@ -44,13 +30,12 @@ function Auth({ onLogin }) {
     event.preventDefault();
     setSignupError('');
     setSignupStatus('');
-
     try {
       const user = await registerAccount(signupForm);
       storeSession(user);
       onLogin(user);
       setSignupForm(initialSignup);
-      setSignupStatus('Account created. You are now signed in.');
+      setSignupStatus('Account created! You are now signed in.');
       history.push('/profile');
     } catch (error) {
       setSignupError(error.response?.data?.message || 'Unable to create account.');
@@ -59,10 +44,15 @@ function Auth({ onLogin }) {
 
   return (
     <main className="page">
-      <section className="auth-grid">
+      <div className="auth-grid">
+
+        {/* Login */}
         <div className="panel section">
-          <span className="eyebrow">Login</span>
+          <span className="eyebrow">Welcome back</span>
           <h2 className="section-title">Sign in</h2>
+          <p className="lede" style={{ marginBottom: 24 }}>
+            Access your CampusCycle account to manage listings and connect with buyers.
+          </p>
           <form className="form-grid" onSubmit={handleLogin}>
             <div className="field">
               <label htmlFor="login-email">Email</label>
@@ -70,7 +60,8 @@ function Auth({ onLogin }) {
                 id="login-email"
                 type="email"
                 value={loginForm.email}
-                onChange={(event) => setLoginForm((current) => ({ ...current, email: event.target.value }))}
+                onChange={(e) => setLoginForm((c) => ({ ...c, email: e.target.value }))}
+                placeholder="you@university.edu"
                 required
               />
             </div>
@@ -80,29 +71,33 @@ function Auth({ onLogin }) {
                 id="login-password"
                 type="password"
                 value={loginForm.password}
-                onChange={(event) => setLoginForm((current) => ({ ...current, password: event.target.value }))}
+                onChange={(e) => setLoginForm((c) => ({ ...c, password: e.target.value }))}
+                placeholder="Your password"
                 required
               />
             </div>
             {loginError ? <div className="status error">{loginError}</div> : null}
             <div className="button-row">
-              <button className="button" type="submit">
-                Sign in
-              </button>
+              <button className="button" type="submit">Sign in</button>
             </div>
           </form>
         </div>
 
+        {/* Signup */}
         <div className="panel section">
-          <span className="eyebrow">Create account</span>
-          <h2 className="section-title">Join your local campus market</h2>
+          <span className="eyebrow">New here?</span>
+          <h2 className="section-title">Join your campus market</h2>
+          <p className="lede" style={{ marginBottom: 24 }}>
+            Free to join — buy or sell items from graduating students near you.
+          </p>
           <form className="form-grid" onSubmit={handleSignup}>
             <div className="field">
               <label htmlFor="signup-username">Username</label>
               <input
                 id="signup-username"
                 value={signupForm.username}
-                onChange={(event) => setSignupForm((current) => ({ ...current, username: event.target.value }))}
+                onChange={(e) => setSignupForm((c) => ({ ...c, username: e.target.value }))}
+                placeholder="your_username"
                 required
               />
             </div>
@@ -112,7 +107,8 @@ function Auth({ onLogin }) {
                 id="signup-email"
                 type="email"
                 value={signupForm.email}
-                onChange={(event) => setSignupForm((current) => ({ ...current, email: event.target.value }))}
+                onChange={(e) => setSignupForm((c) => ({ ...c, email: e.target.value }))}
+                placeholder="you@university.edu"
                 required
               />
             </div>
@@ -122,17 +118,18 @@ function Auth({ onLogin }) {
                 id="signup-password"
                 type="password"
                 value={signupForm.password}
-                onChange={(event) => setSignupForm((current) => ({ ...current, password: event.target.value }))}
+                onChange={(e) => setSignupForm((c) => ({ ...c, password: e.target.value }))}
+                placeholder="Create a password"
                 required
               />
             </div>
-            <div className="toolbar compact-toolbar">
+            <div className="toolbar" style={{ gridTemplateColumns: '1fr 1fr' }}>
               <div className="field">
                 <label htmlFor="signup-school">School</label>
                 <input
                   id="signup-school"
                   value={signupForm.school}
-                  onChange={(event) => setSignupForm((current) => ({ ...current, school: event.target.value }))}
+                  onChange={(e) => setSignupForm((c) => ({ ...c, school: e.target.value }))}
                   placeholder="Harvard University"
                 />
               </div>
@@ -141,16 +138,16 @@ function Auth({ onLogin }) {
                 <input
                   id="signup-region"
                   value={signupForm.region}
-                  onChange={(event) => setSignupForm((current) => ({ ...current, region: event.target.value }))}
+                  onChange={(e) => setSignupForm((c) => ({ ...c, region: e.target.value }))}
                   placeholder="Greater Boston"
                 />
               </div>
               <div className="field">
-                <label htmlFor="signup-area">General area</label>
+                <label htmlFor="signup-area">Area</label>
                 <input
                   id="signup-area"
                   value={signupForm.area}
-                  onChange={(event) => setSignupForm((current) => ({ ...current, area: event.target.value }))}
+                  onChange={(e) => setSignupForm((c) => ({ ...c, area: e.target.value }))}
                   placeholder="Harvard Square"
                 />
               </div>
@@ -159,7 +156,7 @@ function Auth({ onLogin }) {
                 <input
                   id="signup-campus"
                   value={signupForm.campus}
-                  onChange={(event) => setSignupForm((current) => ({ ...current, campus: event.target.value }))}
+                  onChange={(e) => setSignupForm((c) => ({ ...c, campus: e.target.value }))}
                   placeholder="Harvard Yard"
                 />
               </div>
@@ -169,20 +166,19 @@ function Auth({ onLogin }) {
               <textarea
                 id="signup-bio"
                 value={signupForm.bio}
-                onChange={(event) => setSignupForm((current) => ({ ...current, bio: event.target.value }))}
+                onChange={(e) => setSignupForm((c) => ({ ...c, bio: e.target.value }))}
                 placeholder="What are you selling or looking for?"
               />
             </div>
             {signupError ? <div className="status error">{signupError}</div> : null}
             {signupStatus ? <div className="status success">{signupStatus}</div> : null}
             <div className="button-row">
-              <button className="button" type="submit">
-                Create account
-              </button>
+              <button className="button" type="submit">Create free account</button>
             </div>
           </form>
         </div>
-      </section>
+
+      </div>
     </main>
   );
 }

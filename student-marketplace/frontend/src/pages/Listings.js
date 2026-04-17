@@ -25,11 +25,7 @@ function Listings({ currentUser }) {
   const [status, setStatus] = useState('');
 
   useEffect(() => {
-    if (!currentUser) {
-      setForm(initialForm);
-      return;
-    }
-
+    if (!currentUser) { setForm(initialForm); return; }
     setForm((current) => ({
       ...current,
       school: current.school || currentUser.school || '',
@@ -40,36 +36,24 @@ function Listings({ currentUser }) {
 
   useEffect(() => {
     let active = true;
-
     async function loadListings() {
       setLoading(true);
       setError('');
       try {
         const data = await fetchListings(filters);
-        if (active) {
-          setListings(data);
-        }
-      } catch (err) {
-        if (active) {
-          setError('Unable to load listings. Start the backend on port 5001.');
-        }
+        if (active) setListings(data);
+      } catch {
+        if (active) setError('Unable to load listings. Start the backend on port 5001.');
       } finally {
-        if (active) {
-          setLoading(false);
-        }
+        if (active) setLoading(false);
       }
     }
-
     loadListings();
-    return () => {
-      active = false;
-    };
+    return () => { active = false; };
   }, [filters]);
 
   const listingCountLabel = useMemo(() => {
-    if (loading) {
-      return 'Loading listings...';
-    }
+    if (loading) return 'Loading...';
     return `${listings.length} listing${listings.length === 1 ? '' : 's'} found`;
   }, [listings.length, loading]);
 
@@ -77,25 +61,12 @@ function Listings({ currentUser }) {
     event.preventDefault();
     setStatus('');
     setError('');
-
-    if (!currentUser) {
-      return;
-    }
-
+    if (!currentUser) return;
     setIsSubmitting(true);
     try {
-      await createListing({
-        ...form,
-        price: Number(form.price),
-        sellerId: currentUser.id,
-      });
-      setForm({
-        ...initialForm,
-        school: currentUser.school || '',
-        region: currentUser.region || '',
-        area: currentUser.area || '',
-      });
-      setStatus('Listing created.');
+      await createListing({ ...form, price: Number(form.price), sellerId: currentUser.id });
+      setForm({ ...initialForm, school: currentUser.school || '', region: currentUser.region || '', area: currentUser.area || '' });
+      setStatus('Listing published successfully.');
       const data = await fetchListings(filters);
       setListings(data);
     } catch (err) {
@@ -107,33 +78,33 @@ function Listings({ currentUser }) {
 
   function handleImageUpload(event) {
     const file = event.target.files?.[0];
-
-    if (!file) {
-      setForm((current) => ({ ...current, imageData: '' }));
-      return;
-    }
-
+    if (!file) { setForm((c) => ({ ...c, imageData: '' })); return; }
     const reader = new FileReader();
-    reader.onload = () => {
-      setForm((current) => ({ ...current, imageData: String(reader.result || '') }));
-    };
+    reader.onload = () => setForm((c) => ({ ...c, imageData: String(reader.result || '') }));
     reader.readAsDataURL(file);
   }
 
   return (
     <main className="page">
+
+      {/* Browse section */}
       <section className="panel section">
-        <span className="eyebrow">Marketplace feed</span>
-        <h2 className="section-title">Listings</h2>
-        <p className="muted">{listingCountLabel}</p>
-        <div className="toolbar">
+        <div className="listings-hero">
+          <span className="eyebrow">Marketplace</span>
+          <h2 className="section-title">Senior Sales & Campus Goods</h2>
+          <p className="lede" style={{ marginBottom: 0 }}>
+            Browse items from graduating students near you — appliances, furniture, food, and more.
+          </p>
+        </div>
+
+        <div className="toolbar" style={{ marginBottom: 8 }}>
           <div className="field">
             <label htmlFor="search">Search</label>
             <input
               id="search"
               value={filters.q}
-              onChange={(event) => setFilters((current) => ({ ...current, q: event.target.value }))}
-              placeholder="fridge, lamp, textbook"
+              onChange={(e) => setFilters((c) => ({ ...c, q: e.target.value }))}
+              placeholder="fridge, lamp, textbook…"
             />
           </div>
           <div className="field">
@@ -141,7 +112,7 @@ function Listings({ currentUser }) {
             <input
               id="location"
               value={filters.location}
-              onChange={(event) => setFilters((current) => ({ ...current, location: event.target.value }))}
+              onChange={(e) => setFilters((c) => ({ ...c, location: e.target.value }))}
               placeholder="Cambridge"
             />
           </div>
@@ -150,7 +121,7 @@ function Listings({ currentUser }) {
             <select
               id="category"
               value={filters.category}
-              onChange={(event) => setFilters((current) => ({ ...current, category: event.target.value }))}
+              onChange={(e) => setFilters((c) => ({ ...c, category: e.target.value }))}
             >
               <option value="">All categories</option>
               <option value="Appliances">Appliances</option>
@@ -163,7 +134,7 @@ function Listings({ currentUser }) {
             <input
               id="school"
               value={filters.school}
-              onChange={(event) => setFilters((current) => ({ ...current, school: event.target.value }))}
+              onChange={(e) => setFilters((c) => ({ ...c, school: e.target.value }))}
               placeholder="Harvard University"
             />
           </div>
@@ -172,20 +143,20 @@ function Listings({ currentUser }) {
             <input
               id="region"
               value={filters.region}
-              onChange={(event) => setFilters((current) => ({ ...current, region: event.target.value }))}
+              onChange={(e) => setFilters((c) => ({ ...c, region: e.target.value }))}
               placeholder="Greater Boston"
             />
           </div>
           <div className="field">
-            <label htmlFor="area">General area</label>
+            <label htmlFor="area">Area</label>
             <input
               id="area"
               value={filters.area}
-              onChange={(event) => setFilters((current) => ({ ...current, area: event.target.value }))}
+              onChange={(e) => setFilters((c) => ({ ...c, area: e.target.value }))}
               placeholder="Harvard Square"
             />
           </div>
-          <div className="button-row">
+          <div className="button-row" style={{ paddingTop: 8 }}>
             <button
               className="button-secondary"
               type="button"
@@ -196,12 +167,14 @@ function Listings({ currentUser }) {
           </div>
         </div>
 
+        <p className="muted" style={{ fontSize: '0.88rem', marginBottom: 16 }}>{listingCountLabel}</p>
+
         {error ? <div className="status error">{error}</div> : null}
         {status ? <div className="status success">{status}</div> : null}
 
-        <div className="cards" style={{ marginTop: 20 }}>
+        <div className="cards">
           {!loading && listings.length === 0 ? (
-            <div className="empty-state">No listings match the current filters.</div>
+            <div className="empty-state">No listings match the current filters. Try broadening your search.</div>
           ) : null}
           {listings.map((listing) => (
             <ListingCard key={listing.id} listing={listing} />
@@ -209,25 +182,30 @@ function Listings({ currentUser }) {
         </div>
       </section>
 
+      {/* Post a listing section */}
       <section className="panel section">
-        <span className="eyebrow">Create listing</span>
-        <h2 className="section-title">Post something for sale</h2>
+        <span className="eyebrow">Sell something</span>
+        <h2 className="section-title">Post a listing</h2>
+
         {!currentUser ? (
-          <div className="status notice">
-            You need to sign in before publishing a listing. <Link to="/auth">Create an account or log in here.</Link>
+          <div className="status notice" style={{ marginBottom: 20 }}>
+            You need to sign in before publishing a listing.{' '}
+            <Link to="/auth" style={{ color: 'var(--green)', fontWeight: 600 }}>Create an account or log in →</Link>
           </div>
         ) : (
-          <div className="status success">
-            Signed in as {currentUser.username}. Your listing will publish to your profile.
+          <div className="status success" style={{ marginBottom: 20 }}>
+            Signed in as <strong>{currentUser.username}</strong>. Your listing will appear in the marketplace.
           </div>
         )}
+
         <form className="form-grid" onSubmit={handleSubmit}>
           <div className="field">
             <label htmlFor="title">Title</label>
             <input
               id="title"
               value={form.title}
-              onChange={(event) => setForm((current) => ({ ...current, title: event.target.value }))}
+              onChange={(e) => setForm((c) => ({ ...c, title: e.target.value }))}
+              placeholder="e.g. Mini fridge, barely used"
               required
             />
           </div>
@@ -236,20 +214,22 @@ function Listings({ currentUser }) {
             <textarea
               id="description"
               value={form.description}
-              onChange={(event) => setForm((current) => ({ ...current, description: event.target.value }))}
+              onChange={(e) => setForm((c) => ({ ...c, description: e.target.value }))}
+              placeholder="Describe condition, size, any relevant details…"
               required
             />
           </div>
           <div className="toolbar">
             <div className="field">
-              <label htmlFor="price">Price</label>
+              <label htmlFor="price">Price ($)</label>
               <input
                 id="price"
                 type="number"
                 min="0"
                 step="0.01"
                 value={form.price}
-                onChange={(event) => setForm((current) => ({ ...current, price: event.target.value }))}
+                onChange={(e) => setForm((c) => ({ ...c, price: e.target.value }))}
+                placeholder="0.00"
                 required
               />
             </div>
@@ -258,7 +238,7 @@ function Listings({ currentUser }) {
               <select
                 id="form-category"
                 value={form.category}
-                onChange={(event) => setForm((current) => ({ ...current, category: event.target.value }))}
+                onChange={(e) => setForm((c) => ({ ...c, category: e.target.value }))}
               >
                 <option value="General">General</option>
                 <option value="Appliances">Appliances</option>
@@ -270,7 +250,8 @@ function Listings({ currentUser }) {
               <input
                 id="form-location"
                 value={form.location}
-                onChange={(event) => setForm((current) => ({ ...current, location: event.target.value }))}
+                onChange={(e) => setForm((c) => ({ ...c, location: e.target.value }))}
+                placeholder="Pickup location"
                 required
               />
             </div>
@@ -279,7 +260,7 @@ function Listings({ currentUser }) {
               <input
                 id="form-school"
                 value={form.school}
-                onChange={(event) => setForm((current) => ({ ...current, school: event.target.value }))}
+                onChange={(e) => setForm((c) => ({ ...c, school: e.target.value }))}
                 placeholder="Your school"
               />
             </div>
@@ -288,16 +269,16 @@ function Listings({ currentUser }) {
               <input
                 id="form-region"
                 value={form.region}
-                onChange={(event) => setForm((current) => ({ ...current, region: event.target.value }))}
-                placeholder="Your region"
+                onChange={(e) => setForm((c) => ({ ...c, region: e.target.value }))}
+                placeholder="e.g. Greater Boston"
               />
             </div>
             <div className="field">
-              <label htmlFor="form-area">General area</label>
+              <label htmlFor="form-area">Area</label>
               <input
                 id="form-area"
                 value={form.area}
-                onChange={(event) => setForm((current) => ({ ...current, area: event.target.value }))}
+                onChange={(e) => setForm((c) => ({ ...c, area: e.target.value }))}
                 placeholder="Neighborhood or square"
               />
             </div>
@@ -306,20 +287,23 @@ function Listings({ currentUser }) {
               <input id="form-image" type="file" accept="image/*" onChange={handleImageUpload} />
             </div>
           </div>
-          {form.imageData ? <img className="listing-preview" src={form.imageData} alt="Listing preview" /> : null}
+
+          {form.imageData ? (
+            <img className="listing-preview" src={form.imageData} alt="Listing preview" />
+          ) : null}
+
           <div className="button-row">
             {currentUser ? (
               <button className="button" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Publishing...' : 'Publish listing'}
+                {isSubmitting ? 'Publishing…' : 'Publish listing'}
               </button>
             ) : (
-              <Link className="button" to="/auth">
-                Sign in to publish
-              </Link>
+              <Link className="button" to="/auth">Sign in to publish</Link>
             )}
           </div>
         </form>
       </section>
+
     </main>
   );
 }

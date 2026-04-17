@@ -9,42 +9,60 @@ function Checkout({ currentUser }) {
 
   const listing = useMemo(() => location.state?.listing || null, [location.state]);
 
-  function handleSale() {
-    setSaleComplete(true);
-  }
-
   if (!listing) {
     return (
       <main className="page">
         <section className="panel section">
           <span className="eyebrow">Checkout</span>
           <h2 className="section-title">No item selected</h2>
-          <p className="muted">Choose a listing first to enter the mock checkout flow.</p>
+          <p className="muted" style={{ marginBottom: 24 }}>
+            Choose a listing first to enter the mock checkout flow.
+          </p>
           <div className="button-row">
-            <Link className="button" to="/listings">
-              Back to listings
-            </Link>
+            <Link className="button" to="/listings">Back to listings</Link>
           </div>
         </section>
       </main>
     );
   }
 
+  const pickupLabel = [listing.school, listing.region, listing.area].filter(Boolean).join(' · ') || listing.location;
+
   return (
     <main className="page">
-      <section className="checkout-grid">
+      <div className="checkout-grid">
+
+        {/* Order review */}
         <div className="panel section">
-          <span className="eyebrow">Checkout</span>
-          <h2 className="section-title">Review your order</h2>
+          <span className="eyebrow">Order review</span>
+          <h2 className="section-title" style={{ marginBottom: 20 }}>Your item</h2>
+
           {listing.imageData ? (
             <img className="checkout-image" src={listing.imageData} alt={listing.title} />
           ) : (
-            <div className="listing-image listing-image-placeholder checkout-image">No photo uploaded</div>
+            <div
+              className="checkout-image"
+              style={{
+                background: 'var(--off-white)',
+                display: 'grid',
+                placeItems: 'center',
+                color: 'var(--text-secondary)',
+                fontSize: '0.9rem',
+                borderRadius: 'var(--radius-lg)',
+                marginBottom: 20,
+                height: 200,
+              }}
+            >
+              No photo uploaded
+            </div>
           )}
+
           <div className="checkout-summary">
-            <div>
-              <h3>{listing.title}</h3>
-              <p className="muted">{listing.description}</p>
+            <div style={{ paddingBottom: 14 }}>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, letterSpacing: '-0.03em', marginBottom: 6 }}>
+                {listing.title}
+              </h3>
+              <p className="muted" style={{ fontSize: '0.95rem', lineHeight: 1.6 }}>{listing.description}</p>
             </div>
             <div className="checkout-line">
               <span>Item price</span>
@@ -52,7 +70,7 @@ function Checkout({ currentUser }) {
             </div>
             <div className="checkout-line">
               <span>Pickup area</span>
-              <strong>{[listing.school, listing.region, listing.area].filter(Boolean).join(' • ') || listing.location}</strong>
+              <strong>{pickupLabel}</strong>
             </div>
             <div className="checkout-line">
               <span>Seller</span>
@@ -65,16 +83,19 @@ function Checkout({ currentUser }) {
           </div>
         </div>
 
+        {/* Payment */}
         <div className="panel section">
           <span className="eyebrow">Mock payment</span>
-          <h2 className="section-title">Complete a sample sale</h2>
+          <h2 className="section-title" style={{ marginBottom: 20 }}>Complete sale</h2>
+
           {saleComplete ? (
             <>
-              <div className="status success">
-                Mock sale completed for {currentUser ? currentUser.username : 'guest buyer'}.
+              <div className="status success" style={{ marginBottom: 16 }}>
+                ✓ Mock sale completed for <strong>{currentUser ? currentUser.username : 'guest buyer'}</strong>.
               </div>
-              <p className="muted">
+              <p className="muted" style={{ fontSize: '0.92rem', lineHeight: 1.65, marginBottom: 24 }}>
                 This is a demo checkout only. No real payment was processed and the listing was not removed.
+                In production, this would connect to a secure payment processor.
               </p>
               <div className="button-row">
                 <button className="button" type="button" onClick={() => history.push('/listings')}>
@@ -87,7 +108,7 @@ function Checkout({ currentUser }) {
             </>
           ) : (
             <>
-              <div className="form-grid">
+              <div className="form-grid" style={{ marginBottom: 20 }}>
                 <div className="field">
                   <label>Buyer</label>
                   <input value={currentUser ? currentUser.username : 'Guest checkout'} readOnly />
@@ -97,25 +118,27 @@ function Checkout({ currentUser }) {
                   <input value="Campus meetup" readOnly />
                 </div>
                 <div className="field">
-                  <label>Payment</label>
+                  <label>Payment (demo only)</label>
                   <input value="Mock card ending in 4242" readOnly />
                 </div>
               </div>
-              <p className="muted">
-                Use the sale button below to simulate a checkout confirmation screen.
-              </p>
+              <div
+                className="status notice"
+                style={{ marginBottom: 20, fontSize: '0.88rem' }}
+              >
+                This is a demo checkout — no real payment will be charged.
+              </div>
               <div className="button-row">
-                <button className="button" type="button" onClick={handleSale}>
+                <button className="button" type="button" onClick={() => setSaleComplete(true)}>
                   Confirm sale
                 </button>
-                <Link className="button-secondary" to="/listings">
-                  Cancel
-                </Link>
+                <Link className="button-secondary" to="/listings">Cancel</Link>
               </div>
             </>
           )}
         </div>
-      </section>
+
+      </div>
     </main>
   );
 }
