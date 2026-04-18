@@ -7,46 +7,41 @@ function ListingCard({ listing }) {
 
   return (
     <article className="listing-card">
-      <div className="listing-image-wrap">
+      <div className="card-img-wrap">
         {listing.imageData ? (
-          <img className="listing-image" src={listing.imageData} alt={listing.title} />
+          <img className="card-img" src={listing.imageData} alt={listing.title} />
         ) : (
-          <div className="listing-image-placeholder">No photo</div>
+          <div className="card-img-placeholder">No photo</div>
         )}
-        <span className="tag listing-cat-badge">{listing.category}</span>
+        <span className="tag card-cat-tag">{listing.category}</span>
       </div>
 
-      <div className="listing-body">
-        <div className="listing-top">
-          <h3>{listing.title}</h3>
-          <span className="price-pill">{formatPrice(listing.price)}</span>
+      <div className="card-body">
+        <div className="card-top">
+          <h3 className="card-title">{listing.title}</h3>
+          <span className="price-badge">{formatPrice(listing.price)}</span>
         </div>
 
-        <p className="listing-desc">{listing.description}</p>
+        <p className="card-desc">{listing.description}</p>
 
-        <div className="listing-meta-row">
-          <span className="listing-location">
-            <span aria-hidden="true">📍</span>
-            {listing.location}
-          </span>
-          <span>{listing.seller ? listing.seller.username : 'Anonymous'}</span>
+        <div className="card-meta">
+          <span>📍 {listing.location}</span>
+          <span>{listing.seller?.username || 'Anonymous'}</span>
         </div>
 
         {regionParts.length > 0 && (
-          <div className="listing-region-tags">
-            {regionParts.map((part) => (
-              <span key={part} className="tag">{part}</span>
-            ))}
+          <div className="card-tags">
+            {regionParts.map((p) => <span key={p} className="tag">{p}</span>)}
           </div>
         )}
 
-        <div className="listing-actions">
+        <div className="card-action">
           <Link
-            className="button"
-            style={{ width: '100%' }}
+            className="btn btn-sm btn-ghost"
+            style={{ width: '100%', justifyContent: 'center' }}
             to={{ pathname: '/checkout', state: { listing } }}
           >
-            Buy now
+            View item →
           </Link>
         </div>
       </div>
