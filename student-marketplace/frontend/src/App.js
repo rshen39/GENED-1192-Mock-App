@@ -6,6 +6,7 @@ import Listings    from './pages/Listings';
 import UserProfile from './pages/UserProfile';
 import Auth        from './pages/Auth';
 import Checkout    from './pages/Checkout';
+import Mission     from './pages/Mission';
 import Header      from './components/Header';
 import Footer      from './components/Footer';
 import { clearSession, getStoredSession } from './utils';
@@ -30,6 +31,7 @@ function App() {
             <Route path="/profile"><UserProfile currentUser={currentUser} /></Route>
             <Route path="/auth"><Auth onLogin={setCurrentUser} /></Route>
             <Route path="/checkout"><Checkout currentUser={currentUser} /></Route>
+            <Route path="/mission"><Mission /></Route>
           </Switch>
           <Footer />
         </div>
