@@ -41,7 +41,7 @@ function Header({ currentUser, onLogout }) {
 
         <nav className="nav-links">
           <Link to="/listings">Browse</Link>
-          <Link to="/#how-it-works">How it works</Link>
+          <Link to="/mission">Mission</Link>
         </nav>
 
         <div className="nav-right">
