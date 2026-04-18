@@ -477,12 +477,8 @@ img, svg { display: block; max-width: 100%; }
   padding: 80px 24px 100px;
   position: relative;
   overflow: hidden;
-  background: var(--h-bg);
-
-  /* Subtle dot-grid texture — Linear's signature */
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,0.028) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-color: var(--h-bg);
+  /* Photo layers are set via inline style in JSX (CRA can't resolve local url() in CSS) */
 }
 
 /* Aurora glow orbs */
@@ -803,6 +799,74 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ═══════════════════════════════════════════════════════════
+   PHOTO MOMENT — full-bleed move-out section
+   ═══════════════════════════════════════════════════════════ */
+.photo-moment {
+  position: relative;
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #0a0a08;
+  /* Photo layers set via inline style in JSX */
+}
+
+.photo-moment-inner {
+  width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--section-y) 0;
+  max-width: 720px;
+  margin-left: max(calc(50% - 550px), 24px);
+}
+
+.photo-moment-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(74,222,128,0.75);
+  margin-bottom: 24px;
+}
+
+.photo-moment-headline {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 0.90;
+  color: #f2f2f0;
+  margin-bottom: 24px;
+}
+
+.photo-moment-sub {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.68;
+  color: rgba(242,242,240,0.52);
+  max-width: 44ch;
+  margin-bottom: 48px;
+}
+
+.photo-moment-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.photo-moment-num {
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  line-height: 0.88;
+  color: #4ade80;
+}
+
+.photo-moment-unit {
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  color: rgba(242,242,240,0.45);
+  max-width: 22ch;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════
    HOW IT WORKS
    ═══════════════════════════════════════════════════════════ */
 .section { padding: var(--section-y) 0; }
@@ -959,10 +1023,15 @@ img, svg { display: block; max-width: 100%; }
    CTA SECTION — Always dark
    ═══════════════════════════════════════════════════════════ */
 .cta-section {
-  background: #060608;
   text-align: center;
   padding: var(--section-y) 0;
   border-top: 1px solid rgba(255,255,255,0.07);
+  /* Harvard Yard — Unsplash, third photo */
+  background:
+    linear-gradient(rgba(6,6,8,0.90), rgba(6,6,8,0.90)),
+    url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1600&q=80&auto=format&fit=crop')
+      center / cover no-repeat,
+    #060608;
 }
 
 .cta-inner { width: var(--max-w); margin: 0 auto; }

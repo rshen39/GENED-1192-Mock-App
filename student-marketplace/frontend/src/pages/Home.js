@@ -73,6 +73,34 @@ function DomainList() {
   );
 }
 
+/* ── Photo background helpers ───────────────────────────── */
+const PUB = process.env.PUBLIC_URL || '';
+
+function heroBg() {
+  return {
+    backgroundImage: [
+      'radial-gradient(circle, rgba(255,255,255,0.024) 1px, transparent 1px)',
+      'linear-gradient(180deg, rgba(6,6,8,0.80) 0%, rgba(6,6,8,0.58) 45%, rgba(6,6,8,0.88) 100%)',
+      `url(${PUB}/images/harvard-night.jpg)`,
+    ].join(', '),
+    backgroundSize: '28px 28px, 100% 100%, cover',
+    backgroundPosition: '0 0, 0 0, center top',
+    backgroundRepeat: 'repeat, no-repeat, no-repeat',
+  };
+}
+
+function moveOutBg() {
+  return {
+    backgroundImage: [
+      'linear-gradient(105deg, rgba(6,6,8,0.94) 0%, rgba(6,6,8,0.75) 55%, rgba(6,6,8,0.52) 100%)',
+      `url(${PUB}/images/move-out.jpg)`,
+    ].join(', '),
+    backgroundSize: '100% 100%, cover',
+    backgroundPosition: '0 0, center center',
+    backgroundRepeat: 'no-repeat, no-repeat',
+  };
+}
+
 /* ── Main page ──────────────────────────────────────────── */
 export default function Home({ currentUser }) {
   const heroCtrl = useAnimation();
@@ -84,7 +112,7 @@ export default function Home({ currentUser }) {
     <main className="home-wrap">
 
       {/* ══════════════ HERO ══════════════ */}
-      <section className="hero" ref={heroRef}>
+      <section className="hero" ref={heroRef} style={heroBg()}>
         {/* Aurora orbs */}
         <div className="hero-aurora" aria-hidden="true">
           <div className="hero-orb hero-orb-1" />
@@ -245,6 +273,36 @@ export default function Home({ currentUser }) {
               </motion.div>
 
             </motion.div>
+          </AnimSection>
+        </div>
+      </section>
+
+      {/* ══════════════ PHOTO MOMENT — move-out ══════════════ */}
+      <section className="photo-moment" style={moveOutBg()}>
+        <div className="photo-moment-inner">
+          <AnimSection>
+            <FadeItem>
+              <div className="photo-moment-eyebrow">Every end of semester</div>
+            </FadeItem>
+            <FadeItem>
+              <h2 className="photo-moment-headline">
+                Before the<br />dumpsters.
+              </h2>
+            </FadeItem>
+            <FadeItem>
+              <p className="photo-moment-sub">
+                When students move out, perfectly good items get left behind.
+                Not because they're worthless — because there's no easy way to pass them on. Until now.
+              </p>
+            </FadeItem>
+            <FadeItem>
+              <div className="photo-moment-stat">
+                <span className="photo-moment-num">640M</span>
+                <span className="photo-moment-unit">
+                  pounds discarded at<br />U.S. campus move-outs<br />every year
+                </span>
+              </div>
+            </FadeItem>
           </AnimSection>
         </div>
       </section>
