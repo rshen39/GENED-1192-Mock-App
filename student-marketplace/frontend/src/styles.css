@@ -1692,6 +1692,28 @@ img, svg { display: block; max-width: 100%; }
 .footer-bottom-links a:hover { color: rgba(242,242,240,0.55); }
 
 /* ═══════════════════════════════════════════════════════════
+   SCROLL PROGRESS BAR
+   ═══════════════════════════════════════════════════════════ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  z-index: 9999;
+  pointer-events: none;
+  background: linear-gradient(90deg, #22c55e 0%, #4ade80 50%, #22c55e 100%);
+  background-size: 200% 100%;
+  animation: shimmer-line 2.4s linear infinite;
+  box-shadow: 0 0 12px rgba(34,197,94,0.7), 0 0 4px rgba(34,197,94,0.4);
+  transition: width 80ms linear;
+}
+
+@keyframes shimmer-line {
+  0%   { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════
    HERO SPLIT — Phone + text side-by-side
    ═══════════════════════════════════════════════════════════ */
 .hero-split {
@@ -1982,6 +2004,11 @@ img, svg { display: block; max-width: 100%; }
   right: -120px;
 }
 
+.float-card-4 {
+  bottom: 70px;
+  right: -132px;
+}
+
 .float-card-icon {
   width: 32px;
   height: 32px;
@@ -2053,6 +2080,30 @@ img, svg { display: block; max-width: 100%; }
 }
 [data-theme="dark"] .feature-card:hover {
   background: linear-gradient(160deg, #1d1d1b 0%, #141413 100%);
+}
+
+/* Feature card glimmer sweep */
+.feature-card {
+  position: relative;
+  overflow: hidden;
+}
+.feature-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    125deg,
+    transparent 30%,
+    rgba(34,197,94,0.05) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+.feature-card:hover::after {
+  transform: translateX(100%);
+  transition: transform 600ms ease;
 }
 
 .feature-num {
@@ -2160,6 +2211,109 @@ img, svg { display: block; max-width: 100%; }
 .cat-card:hover .cat-card-arrow {
   transform: translate(3px, -3px);
   color: rgba(255,255,255,0.85);
+}
+
+/* Glimmer sweep on hover */
+.cat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    rgba(255,255,255,0.10) 50%,
+    transparent 75%
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.cat-card:hover::before {
+  transform: translateX(100%);
+  transition: transform 550ms ease;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DORM SECTION — Photo background, intimate editorial
+   ═══════════════════════════════════════════════════════════ */
+.dorm-section {
+  position: relative;
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #040406;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* subtle grain overlay */
+.dorm-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: overlay;
+}
+
+.dorm-inner {
+  position: relative;
+  z-index: 2;
+  width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--section-y) 0;
+  max-width: 640px;
+  margin-left: max(calc(50% - 550px), 24px);
+}
+
+.dorm-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.dorm-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(251,191,36,0.80);
+  margin-bottom: 24px;
+}
+
+.dorm-headline {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 0.90;
+  color: #f2f2f0;
+  margin-bottom: 26px;
+}
+
+.dorm-body {
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  line-height: 1.78;
+  color: rgba(242,242,240,0.52);
+  max-width: 44ch;
+  margin-bottom: 40px;
+}
+
+.dorm-btn {
+  background: #f2f2f0;
+  color: #080808;
+}
+
+.dorm-btn-ghost {
+  background: transparent;
+  color: rgba(242,242,240,0.75);
+  border-color: rgba(255,255,255,0.18);
+}
+.dorm-btn-ghost:hover {
+  background: rgba(255,255,255,0.06);
+  color: #f2f2f0;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2387,6 +2541,8 @@ img, svg { display: block; max-width: 100%; }
   .float-card-1 { left: -60px; top: 30px; }
   .float-card-2 { left: -70px; bottom: 100px; }
   .float-card-3 { right: -60px; top: 150px; }
+  .float-card-4 { right: -65px; bottom: 50px; }
+  .dorm-inner { margin-left: 24px; }
   .features-grid { grid-template-columns: 1fr; }
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .verify-grid { grid-template-columns: 1fr; gap: 48px; }
