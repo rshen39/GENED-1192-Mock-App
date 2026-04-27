@@ -3,17 +3,17 @@
    Linear dark-native × Apple editorial precision.
    ═══════════════════════════════════════════════════════════ */
 
-/* ── Tokens: Light — Warm earthy environmental ─────────── */
+/* ── Tokens: Light — Clean with gentle warmth ───────────── */
 :root {
-  --bg:            #f7f6f1;
-  --bg-alt:        #edeae2;
+  --bg:            #f9f9f7;
+  --bg-alt:        #f2f1ed;
   --bg-raised:     #ffffff;
-  --bg-inset:      #e3e0d6;
+  --bg-inset:      #eae9e4;
   --bg-elevated:   #ffffff;
 
-  --text-1:        #1a1916;
-  --text-2:        #5c5850;
-  --text-3:        #9c9589;
+  --text-1:        #1c1b18;
+  --text-2:        #5a5854;
+  --text-3:        #9a9894;
 
   --border:        rgba(26,25,22,0.07);
   --border-mid:    rgba(26,25,22,0.11);
@@ -468,13 +468,13 @@ img, svg { display: block; max-width: 100%; }
 
 /* Custom dark-always tokens used inside .hero — forest night */
 .hero {
-  --h-bg:     #091308;
-  --h-bg2:    #0e1d0c;
+  --h-bg:     #111d12;
+  --h-bg2:    #162118;
   --h-text:   #e4ede0;
-  --h-text-2: #5a7858;
+  --h-text-2: #6a8868;
   --h-border: rgba(228,237,224,0.08);
   --h-green:  #52b788;
-  --h-green-dim: rgba(82,183,136,0.12);
+  --h-green-dim: rgba(82,183,136,0.10);
 }
 
 .home-wrap { padding-top: var(--nav-h); }
@@ -819,7 +819,7 @@ img, svg { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   overflow: hidden;
-  background-color: #0c1609;
+  background-color: #141f15;
   /* Photo layers set via inline style in JSX */
 }
 
@@ -932,12 +932,12 @@ img, svg { display: block; max-width: 100%; }
    WASTE / IMPACT — Always dark
    ═══════════════════════════════════════════════════════════ */
 .waste-section {
-  background: #091308;
+  background: #131f14;
   padding: var(--section-y) 0;
   position: relative;
   overflow: hidden;
   background-image:
-    radial-gradient(circle, rgba(255,255,255,0.022) 1px, transparent 1px);
+    radial-gradient(circle, rgba(255,255,255,0.016) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
@@ -1043,7 +1043,7 @@ img, svg { display: block; max-width: 100%; }
     linear-gradient(rgba(6,6,8,0.90), rgba(6,6,8,0.90)),
     url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1600&q=80&auto=format&fit=crop')
       center / cover no-repeat,
-    #091308;
+    #131f14;
 }
 
 .cta-inner { width: var(--max-w); margin: 0 auto; }
@@ -1094,7 +1094,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: #091308;
+  background: #131f14;
   background-image: radial-gradient(circle, rgba(255,255,255,0.022) 1px, transparent 1px);
   background-size: 28px 28px;
   padding: 96px 24px;
@@ -1237,7 +1237,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* Values section */
 .mission-values-section {
-  background: #091308;
+  background: #131f14;
   padding: var(--section-y) 0;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
@@ -1448,7 +1448,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* ── Page hero header ── */
 .listings-hero {
-  background: linear-gradient(135deg, #091308 0%, #0f2010 60%, #152a18 100%);
+  background: linear-gradient(135deg, #131f14 0%, #0f2010 60%, #152a18 100%);
   padding: 60px 0 52px;
   border-bottom: 1px solid rgba(82,183,136,0.12);
   position: relative;
@@ -2131,7 +2131,7 @@ img, svg { display: block; max-width: 100%; }
    FOOTER
    ═══════════════════════════════════════════════════════════ */
 .footer {
-  background: #091308;
+  background: #131f14;
   color: rgba(228,237,224,0.48);
   border-top: 1px solid rgba(255,255,255,0.06);
 }
@@ -2660,7 +2660,7 @@ img, svg { display: block; max-width: 100%; }
    ═══════════════════════════════════════════════════════════ */
 .cat-section {
   padding: var(--section-y) 0;
-  background: #091308;
+  background: #131f14;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 
