@@ -235,8 +235,8 @@ export default function Home({ currentUser }) {
 
   const heroBg = {
     backgroundImage: [
-      'radial-gradient(circle, rgba(255,255,255,0.022) 1px, transparent 1px)',
-      'linear-gradient(180deg, rgba(6,6,8,0.82) 0%, rgba(6,6,8,0.50) 45%, rgba(6,6,8,0.90) 100%)',
+      'radial-gradient(circle, rgba(255,255,255,0.018) 1px, transparent 1px)',
+      'linear-gradient(180deg, rgba(9,19,8,0.84) 0%, rgba(9,19,8,0.52) 45%, rgba(9,19,8,0.92) 100%)',
       'url(/harvard-night.jpg)',
     ].join(', '),
     backgroundSize: '28px 28px, 100% 100%, cover',
@@ -246,7 +246,7 @@ export default function Home({ currentUser }) {
 
   const dormBg = {
     backgroundImage: [
-      'linear-gradient(160deg, rgba(4,4,6,0.93) 0%, rgba(6,6,8,0.62) 55%, rgba(4,4,6,0.92) 100%)',
+      'linear-gradient(160deg, rgba(5,12,5,0.93) 0%, rgba(9,19,8,0.62) 55%, rgba(5,12,5,0.92) 100%)',
       'url(/dorm-room.jpg)',
     ].join(', '),
     backgroundSize: '100% 100%, cover',
@@ -316,8 +316,8 @@ export default function Home({ currentUser }) {
 
           {/* Right — phone */}
           <motion.div className="hero-phone-col"
-            initial={{ opacity: 0, y: 56, scale: 0.93, rotate: -2 }}
-            animate={heroInView ? { opacity: 1, y: 0, scale: 1, rotate: -2 } : {}}
+            initial={{ opacity: 0, y: 56, scale: 0.93 }}
+            animate={heroInView ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1], delay: 0.32 }}>
             <PhoneMockup />
           </motion.div>
@@ -421,7 +421,7 @@ export default function Home({ currentUser }) {
       {/* ══════ PHOTO MOMENT ══════ */}
       <section className="photo-moment" style={{
         backgroundImage: [
-          'linear-gradient(105deg, rgba(6,6,8,0.94) 0%, rgba(6,6,8,0.75) 55%, rgba(6,6,8,0.52) 100%)',
+          'linear-gradient(105deg, rgba(9,19,8,0.94) 0%, rgba(9,19,8,0.75) 55%, rgba(9,19,8,0.52) 100%)',
           'url(/move-out.jpg)',
         ].join(', '),
         backgroundSize: '100% 100%, cover',
