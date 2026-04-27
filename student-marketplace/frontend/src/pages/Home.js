@@ -235,8 +235,8 @@ export default function Home({ currentUser }) {
 
   const heroBg = {
     backgroundImage: [
-      'radial-gradient(circle, rgba(255,255,255,0.018) 1px, transparent 1px)',
-      'linear-gradient(180deg, rgba(9,19,8,0.84) 0%, rgba(9,19,8,0.52) 45%, rgba(9,19,8,0.92) 100%)',
+      'radial-gradient(circle, rgba(255,255,255,0.016) 1px, transparent 1px)',
+      'linear-gradient(180deg, rgba(17,29,18,0.86) 0%, rgba(17,29,18,0.54) 45%, rgba(17,29,18,0.92) 100%)',
       'url(/harvard-night.jpg)',
     ].join(', '),
     backgroundSize: '28px 28px, 100% 100%, cover',
@@ -246,7 +246,7 @@ export default function Home({ currentUser }) {
 
   const dormBg = {
     backgroundImage: [
-      'linear-gradient(160deg, rgba(5,12,5,0.93) 0%, rgba(9,19,8,0.62) 55%, rgba(5,12,5,0.92) 100%)',
+      'linear-gradient(160deg, rgba(14,24,14,0.92) 0%, rgba(17,29,18,0.60) 55%, rgba(14,24,14,0.90) 100%)',
       'url(/dorm-room.jpg)',
     ].join(', '),
     backgroundSize: '100% 100%, cover',
@@ -421,7 +421,7 @@ export default function Home({ currentUser }) {
       {/* ══════ PHOTO MOMENT ══════ */}
       <section className="photo-moment" style={{
         backgroundImage: [
-          'linear-gradient(105deg, rgba(9,19,8,0.94) 0%, rgba(9,19,8,0.75) 55%, rgba(9,19,8,0.52) 100%)',
+          'linear-gradient(105deg, rgba(17,29,18,0.94) 0%, rgba(17,29,18,0.72) 55%, rgba(17,29,18,0.48) 100%)',
           'url(/move-out.jpg)',
         ].join(', '),
         backgroundSize: '100% 100%, cover',
