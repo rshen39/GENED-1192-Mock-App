@@ -72,7 +72,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-1',
-      imageData: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-10T09:00:00.000Z',
     },
     {
@@ -86,7 +86,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-2',
-      imageData: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-10T10:00:00.000Z',
     },
     {
@@ -100,7 +100,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Allston',
       sellerId: 'user-3',
-      imageData: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-11T08:30:00.000Z',
     },
     {
@@ -114,7 +114,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-4',
-      imageData: 'https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-11T11:00:00.000Z',
     },
     {
@@ -128,7 +128,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Cambridge',
       sellerId: 'user-3',
-      imageData: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-11T14:00:00.000Z',
     },
     {
@@ -142,7 +142,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-1',
-      imageData: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-12T09:00:00.000Z',
     },
     {
@@ -156,7 +156,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-2',
-      imageData: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-12T12:00:00.000Z',
     },
     {
@@ -170,7 +170,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-4',
-      imageData: 'https://images.unsplash.com/photo-1541558703-05c6bc7e6bc0?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-12T15:00:00.000Z',
     },
     {
@@ -184,7 +184,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-3',
-      imageData: 'https://images.unsplash.com/photo-1527443224154-522f2f49e321?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-13T09:00:00.000Z',
     },
     {
@@ -198,7 +198,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-1',
-      imageData: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-13T11:00:00.000Z',
     },
     {
@@ -212,7 +212,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-2',
-      imageData: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-13T14:00:00.000Z',
     },
     {
@@ -226,7 +226,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-4',
-      imageData: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-14T09:00:00.000Z',
     },
     {
@@ -240,7 +240,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-3',
-      imageData: 'https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-14T11:00:00.000Z',
     },
     {
@@ -254,7 +254,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-1',
-      imageData: 'https://images.unsplash.com/photo-1520975954732-35dd22299614?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-14T14:00:00.000Z',
     },
     {
@@ -268,7 +268,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Cambridge',
       sellerId: 'user-2',
-      imageData: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-15T09:00:00.000Z',
     },
     {
@@ -282,7 +282,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-4',
-      imageData: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-15T11:00:00.000Z',
     },
     {
@@ -296,7 +296,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-3',
-      imageData: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-15T14:00:00.000Z',
     },
     {
@@ -310,7 +310,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-1',
-      imageData: 'https://images.unsplash.com/photo-1558615419-1d94b9b4d5e7?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-16T09:00:00.000Z',
     },
     {
@@ -324,7 +324,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-2',
-      imageData: 'https://images.unsplash.com/photo-1556909045-b2d8c04e5e25?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-16T11:00:00.000Z',
     },
     {
@@ -338,7 +338,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Cambridge',
       sellerId: 'user-4',
-      imageData: 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-16T14:00:00.000Z',
     },
     {
@@ -352,7 +352,7 @@ const seedData = {
       region: 'Greater Boston',
       area: 'Harvard Square',
       sellerId: 'user-1',
-      imageData: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400&q=80&auto=format&fit=crop',
+      imageData: '',
       createdAt: '2026-04-17T09:00:00.000Z',
     },
   ],
