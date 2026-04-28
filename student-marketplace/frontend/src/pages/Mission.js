@@ -1,29 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from '../utils/useInView';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] } },
-};
-
-function AnimSection({ children, className, style, delay = 0.1 }) {
-  const ctrl = useAnimation();
-  const [ref, inView] = useInView();
-  useEffect(() => { if (inView) ctrl.start('show'); }, [inView, ctrl]);
-  return (
-    <motion.div ref={ref} className={className} style={style}
-      initial="hidden" animate={ctrl}
-      variants={{ hidden: {}, show: { transition: { staggerChildren: delay } } }}>
-      {children}
-    </motion.div>
-  );
-}
-
-function FadeItem({ children, className, style }) {
-  return <motion.div className={className} style={style} variants={fadeUp}>{children}</motion.div>;
-}
+import { motion } from 'framer-motion';
+import { AnimSection, FadeItem, fadeUp } from '../components/Anim';
 
 const VALUES = [
   {

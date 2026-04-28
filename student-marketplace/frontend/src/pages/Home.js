@@ -1,31 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useInView } from '../utils/useInView';
-
-/* ── Animation variants ─────────────────────────────────── */
-const fadeUp = {
-  hidden: { opacity: 0, y: 36 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
-};
-
-/* ── Animation section wrapper ──────────────────────────── */
-function AnimSection({ children, className, style, delay = 0.1 }) {
-  const ctrl = useAnimation();
-  const [ref, inView] = useInView();
-  useEffect(() => { if (inView) ctrl.start('show'); }, [inView, ctrl]);
-  return (
-    <motion.div ref={ref} className={className} style={style}
-      initial="hidden" animate={ctrl}
-      variants={{ hidden: {}, show: { transition: { staggerChildren: delay } } }}>
-      {children}
-    </motion.div>
-  );
-}
-
-function FadeItem({ children, className, style }) {
-  return <motion.div className={className} style={style} variants={fadeUp}>{children}</motion.div>;
-}
+import { AnimSection, FadeItem, fadeUp } from '../components/Anim';
 
 /* ── Scroll progress bar ────────────────────────────────── */
 function ScrollProgress() {
@@ -229,9 +206,7 @@ const FEATURES = [
    Main
    ══════════════════════════════════════════════════════════ */
 export default function Home({ currentUser }) {
-  const heroCtrl = useAnimation();
   const [heroRef, heroInView] = useInView();
-  useEffect(() => { if (heroInView) heroCtrl.start('show'); }, [heroInView, heroCtrl]);
 
   const heroBg = {
     backgroundImage: [
