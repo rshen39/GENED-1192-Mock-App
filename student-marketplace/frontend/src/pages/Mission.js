@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { AnimSection, FadeItem, fadeUp } from '../components/Anim';
+import { AnimSection, FadeItem } from '../components/Anim';
 
 const VALUES = [
   {
@@ -243,25 +242,22 @@ export default function Mission() {
       {/* ══ VALUES ══ */}
       <section className="mv2-values">
         <div className="section-wrap">
-          <AnimSection>
-            <FadeItem className="mv2-values-header">
-              <span className="eyebrow">What we stand for</span>
-              <h2 className="h1" style={{ marginBottom: 8 }}>
-                Three things we'll<br />never compromise on.
-              </h2>
-            </FadeItem>
-            <motion.div className="mv2-values-grid"
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}>
-              {VALUES.map(({ num, icon, title, body }) => (
-                <motion.div key={num} className="mv2-value-card" variants={fadeUp}>
-                  <span className="mv2-value-icon">{icon}</span>
-                  <div className="mv2-value-num">{num}</div>
-                  <h3 className="mv2-value-title">{title}</h3>
-                  <p className="mv2-value-body">{body}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimSection>
+          <FadeItem className="mv2-values-header">
+            <span className="eyebrow">What we stand for</span>
+            <h2 className="h1" style={{ marginBottom: 8 }}>
+              Three things we'll<br />never compromise on.
+            </h2>
+          </FadeItem>
+          <div className="mv2-values-grid">
+            {VALUES.map(({ num, icon, title, body }, i) => (
+              <FadeItem key={num} className="mv2-value-card" delay={i * 0.12}>
+                <span className="mv2-value-icon">{icon}</span>
+                <div className="mv2-value-num">{num}</div>
+                <h3 className="mv2-value-title">{title}</h3>
+                <p className="mv2-value-body">{body}</p>
+              </FadeItem>
+            ))}
+          </div>
         </div>
       </section>
 

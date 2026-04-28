@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from '../utils/useInView';
-import { AnimSection, FadeItem, fadeUp } from '../components/Anim';
+import { AnimSection, FadeItem } from '../components/Anim';
 
 /* ── Scroll progress bar ────────────────────────────────── */
 function ScrollProgress() {
@@ -206,7 +206,6 @@ const FEATURES = [
    Main
    ══════════════════════════════════════════════════════════ */
 export default function Home({ currentUser }) {
-  const [heroRef, heroInView] = useInView();
 
   const heroBg = {
     backgroundImage: [
@@ -234,7 +233,7 @@ export default function Home({ currentUser }) {
       <ScrollProgress />
 
       {/* ══════ HERO ══════ */}
-      <section className="hero hero-split" ref={heroRef} style={heroBg}>
+      <section className="hero hero-split" style={heroBg}>
         <div className="hero-glow-sphere" aria-hidden="true" />
 
         <div className="hero-split-inner">
@@ -242,28 +241,28 @@ export default function Home({ currentUser }) {
           <div className="hero-text-col">
             <motion.div className="hero-label"
               initial={{ opacity: 0, y: 14 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}>
               <span className="hero-dot" />Harvard pilot · .edu only
             </motion.div>
 
             <motion.h1 className="hero-headline"
               initial={{ opacity: 0, y: 44 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}>
               Pass it on.
             </motion.h1>
 
             <motion.p className="hero-sub"
               initial={{ opacity: 0, y: 24 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}>
               The student-only campus marketplace for buying and reselling dorm essentials — before they become waste.
             </motion.p>
 
             <motion.div className="btn-row"
               initial={{ opacity: 0, y: 18 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}>
               <Link className="btn btn-lg" to="/listings">Browse listings</Link>
               <Link className="btn btn-lg btn-ghost" to={currentUser ? '/listings' : '/auth'}>
@@ -273,7 +272,7 @@ export default function Home({ currentUser }) {
 
             <motion.div className="hero-stats"
               initial={{ opacity: 0 }}
-              animate={heroInView ? { opacity: 1 } : {}}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.42 }}>
               {[
                 { val: 'Harvard', label: 'Pilot campus' },
@@ -292,7 +291,7 @@ export default function Home({ currentUser }) {
           {/* Right — phone */}
           <motion.div className="hero-phone-col"
             initial={{ opacity: 0, y: 56, scale: 0.93 }}
-            animate={heroInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1], delay: 0.32 }}>
             <PhoneMockup />
           </motion.div>
@@ -317,20 +316,17 @@ export default function Home({ currentUser }) {
             </FadeItem>
           </AnimSection>
 
-          <AnimSection>
-            <motion.div className="features-grid"
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.13 } } }}>
-              {FEATURES.map(({ num, title, body }) => (
-                <motion.div key={num} variants={fadeUp} style={{ display: 'grid' }}>
-                  <TiltCard className="feature-card" intensity={5}>
-                    <div className="feature-num">{num}</div>
-                    <h3 className="feature-title">{title}</h3>
-                    <p className="feature-body">{body}</p>
-                  </TiltCard>
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimSection>
+          <div className="features-grid">
+            {FEATURES.map(({ num, title, body }, i) => (
+              <FadeItem key={num} delay={i * 0.13} style={{ display: 'grid' }}>
+                <TiltCard className="feature-card" intensity={5}>
+                  <div className="feature-num">{num}</div>
+                  <h3 className="feature-title">{title}</h3>
+                  <p className="feature-body">{body}</p>
+                </TiltCard>
+              </FadeItem>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -375,10 +371,9 @@ export default function Home({ currentUser }) {
               </p>
             </FadeItem>
 
-            <motion.div className="cat-grid"
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.055 } } }}>
-              {CATEGORIES.map(({ icon, name, desc, gradient }) => (
-                <motion.div key={name} variants={fadeUp}>
+            <div className="cat-grid">
+              {CATEGORIES.map(({ icon, name, desc, gradient }, i) => (
+                <FadeItem key={name} delay={i * 0.055}>
                   <Link to={`/listings?category=${name}`} className="cat-card" style={{ '--cat-gradient': gradient }}>
                     <div className="cat-card-glow" />
                     <span className="cat-card-icon">{icon}</span>
@@ -386,9 +381,9 @@ export default function Home({ currentUser }) {
                     <span className="cat-card-desc">{desc}</span>
                     <span className="cat-card-arrow">→</span>
                   </Link>
-                </motion.div>
+                </FadeItem>
               ))}
-            </motion.div>
+            </div>
           </AnimSection>
         </div>
       </section>
@@ -503,23 +498,20 @@ export default function Home({ currentUser }) {
               </p>
             </FadeItem>
           </AnimSection>
-          <AnimSection>
-            <motion.div className="waste-numbers"
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.14 } } }}>
-              {[
-                { end: 640,  prefix: '',  suffix: 'M', label: 'pounds of student items discarded at move-out each year' },
-                { end: 350,  prefix: '$', suffix: '',  label: 'average value of items thrown away per graduating student' },
-                { end: 85,   prefix: '',  suffix: '%', label: 'of move-out waste that could be reused or donated instead' },
-              ].map(({ end, prefix, suffix, label }) => (
-                <motion.div key={label} className="waste-number-cell" variants={fadeUp}>
-                  <div className="waste-num-val">
-                    <CountUp end={end} prefix={prefix} suffix={suffix} />
-                  </div>
-                  <div className="waste-num-label">{label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimSection>
+          <div className="waste-numbers">
+            {[
+              { end: 640,  prefix: '',  suffix: 'M', label: 'pounds of student items discarded at move-out each year' },
+              { end: 350,  prefix: '$', suffix: '',  label: 'average value of items thrown away per graduating student' },
+              { end: 85,   prefix: '',  suffix: '%', label: 'of move-out waste that could be reused or donated instead' },
+            ].map(({ end, prefix, suffix, label }, i) => (
+              <FadeItem key={label} className="waste-number-cell" delay={i * 0.14}>
+                <div className="waste-num-val">
+                  <CountUp end={end} prefix={prefix} suffix={suffix} />
+                </div>
+                <div className="waste-num-label">{label}</div>
+              </FadeItem>
+            ))}
+          </div>
         </div>
       </section>
 
